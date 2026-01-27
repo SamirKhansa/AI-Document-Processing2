@@ -11,6 +11,13 @@ const DocumentResults = ({ onOpenViewer }) => {
   const extractionResults = location.state?.extractionResults || [];
   const industry_name = location.state?.industry_name || "";
 
+  const industies = {
+    Healthcare: ["QID", "Insurance Card"],
+    Finance: ["QID", "Passports"],
+    Transportation: ["QID", "Driving License"],
+    Hospitality: ["QID", "Passports", "Driving License"],
+  };
+
   const [resultsTitle, setResultsTitle] = React.useState("");
   const [allDocsValid, setAllDocsValid] = React.useState(null);
   // Mock data for standalone testing
@@ -20,40 +27,44 @@ const DocumentResults = ({ onOpenViewer }) => {
     validationResults.length > 0 ? validationResults : sampleValidationResults;
 
   useEffect(() => {
-    if (!resultsToDisplay.length) return;
+    if (!extractionResults.length || !industry_name) return;
 
-    const allFilesValid = resultsToDisplay.every(
-      (file) => file.isValid === true,
+    const requiredDocs = industies[industry_name] || [];
+
+    // Get uploaded file types only
+    const uploadedDocTypes = extractionResults.map((doc) => doc.fileType);
+
+    // Find missing documents
+    const missingDocs = requiredDocs.filter(
+      (reqDoc) => !uploadedDocTypes.includes(reqDoc),
     );
 
-    if (allFilesValid) {
-      setAllDocsValid(true);
-
-      switch (industry_name) {
-        case "Healthcare":
-          setResultsTitle("Patient file has been successfully created.");
-          break;
-
-        case "Finance":
-          setResultsTitle("User bank account has been successfully created.");
-          break;
-
-        case "Transportation":
-          setResultsTitle("Car rental account has been successfully created.");
-          break;
-
-        case "Hospitality":
-          setResultsTitle("Customer account has been successfully created.");
-          break;
-
-        default:
-          console.log("All files are valid/");
-      }
-    } else {
+    if (missingDocs.length > 0) {
       setAllDocsValid(false);
-      setResultsTitle("Invalid Documents Detected⚠️");
+      setResultsTitle(`Missing required documents: ${missingDocs.join(", ")}`);
+      return;
     }
-  }, [resultsToDisplay]);
+
+    // If no documents are missing → success message
+    setAllDocsValid(true);
+
+    switch (industry_name) {
+      case "Healthcare":
+        setResultsTitle("Patient file has been successfully created.");
+        break;
+      case "Finance":
+        setResultsTitle("User bank account has been successfully created.");
+        break;
+      case "Transportation":
+        setResultsTitle("Car rental account has been successfully created.");
+        break;
+      case "Hospitality":
+        setResultsTitle("Customer account has been successfully created.");
+        break;
+      default:
+        setResultsTitle("All required documents are present.");
+    }
+  }, [extractionResults, industry_name]);
 
   const handleCardClick = (doc, index) => {
     onOpenViewer({
@@ -186,7 +197,7 @@ const DocumentResults = ({ onOpenViewer }) => {
     <span
       style={{ ...styles.statusIcon, color: isValid ? "#33d6a2" : "#ff6b6b" }}
     >
-      {isValid ? <i className='pi pi-check'></i> : ""}
+      {isValid ? <i className="pi pi-check"></i> : ""}
     </span>
   );
 
@@ -220,7 +231,7 @@ const DocumentResults = ({ onOpenViewer }) => {
       <header style={styles.header}>
         <h1 style={styles.mainTitle}>
           AI Document{" "}
-          <span className='bg-gradient-to-r from-[var(--color-core-indigo)] to-[var(--color-signal-red)] bg-clip-text text-transparent'>
+          <span className="bg-gradient-to-r from-[var(--color-core-indigo)] to-[var(--color-signal-red)] bg-clip-text text-transparent">
             Processing Results
           </span>
         </h1>
@@ -235,7 +246,7 @@ const DocumentResults = ({ onOpenViewer }) => {
           <div
             key={index}
             style={getCardStyle(index)}
-            className='bg-white/5 border-white/10'
+            className="bg-white/5 border-white/10"
             onClick={() => handleCardClick(doc, index)}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
@@ -252,9 +263,9 @@ const DocumentResults = ({ onOpenViewer }) => {
           </div>
         ))}
       </div>
-      <div className='flex justify-center mt-10 gap-6'>
+      <div className="flex justify-center mt-10 gap-6">
         <button
-          className='bg-transparent rounded-2xl p-6 text-[#c0c0e0] hover:text-white hover:bg-white/10 transition-all duration-300'
+          className="bg-transparent rounded-2xl p-6 text-[#c0c0e0] hover:text-white hover:bg-white/10 transition-all duration-300"
           style={{ border: "1px solid #FFFFFF33" }}
           onClick={handleGoHome}
         >
@@ -262,7 +273,7 @@ const DocumentResults = ({ onOpenViewer }) => {
         </button>
 
         <button
-          className='bg-(--color-core-indigo) rounded-2xl p-6 text-(--color-text-primary) hover:text-white hover:bg-(--color-core-indigo)/75 transition-all duration-300'
+          className="bg-(--color-core-indigo) rounded-2xl p-6 text-(--color-text-primary) hover:text-white hover:bg-(--color-core-indigo)/75 transition-all duration-300"
           onClick={handleGoToResults}
         >
           View Results
