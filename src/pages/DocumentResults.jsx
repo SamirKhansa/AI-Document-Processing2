@@ -14,7 +14,7 @@ const DocumentResults = ({ onOpenViewer }) => {
   console.log(extractionResults);
 
   const industies = {
-    Healthcare: ["QID", "Insurance Card"],
+    Healthcare: ["QID", "Insurance"],
     Finance: ["QID", "Passport"],
     Transportation: ["QID", "Driving License"],
     Hospitality: ["QID", "Passport", "Driving License"],
