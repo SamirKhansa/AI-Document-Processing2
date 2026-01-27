@@ -27,14 +27,13 @@ const DocumentResults = ({ onOpenViewer }) => {
     validationResults.length > 0 ? validationResults : sampleValidationResults;
 
   useEffect(() => {
-    if (!extractionResults.length || !industry_name) return;
+    if (!industry_name) return;
 
     const requiredDocs = industies[industry_name] || [];
 
-    // Get uploaded file types only
+    // 1️⃣ Check missing documents (from extractionResults)
     const uploadedDocTypes = extractionResults.map((doc) => doc.fileType);
 
-    // Find missing documents
     const missingDocs = requiredDocs.filter(
       (reqDoc) => !uploadedDocTypes.includes(reqDoc),
     );
@@ -45,7 +44,20 @@ const DocumentResults = ({ onOpenViewer }) => {
       return;
     }
 
-    // If no documents are missing → success message
+    // 2️⃣ Check invalid documents (from validationResults)
+    const invalidDocs = validationResults.filter(
+      (doc) => doc.isValid === false,
+    );
+
+    if (invalidDocs.length > 0) {
+      setAllDocsValid(false);
+      setResultsTitle(
+        "Some documents were uploaded but failed validation. Please review and re-upload.",
+      );
+      return;
+    }
+
+    // 3️⃣ All good ✅
     setAllDocsValid(true);
 
     switch (industry_name) {
@@ -64,7 +76,7 @@ const DocumentResults = ({ onOpenViewer }) => {
       default:
         setResultsTitle("All required documents are present.");
     }
-  }, [extractionResults, industry_name]);
+  }, [industry_name, extractionResults, validationResults]);
 
   const handleCardClick = (doc, index) => {
     onOpenViewer({
