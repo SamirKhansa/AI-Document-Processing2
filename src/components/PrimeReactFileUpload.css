@@ -18,6 +18,7 @@
 }
 
 .p-fileupload-header {
+  background-color: #100e29 !important;
   border: none !important;
   border-radius: 12px 12px 0 0;
 }
@@ -37,6 +38,20 @@
   overflow: auto;
   background: transparent;
   border: none;
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* Remove the progress bar (white bar) that appears after adding files */
+.p-fileupload-content .p-progressbar {
+  display: none !important;
+}
+
+/* Remove borders and set backgrounds for file rows and items */
+.p-fileupload-row,
+.p-fileupload-file {
+  border: none !important;
+  background: transparent !important;
 }
 
 .p-fileupload-advanced .p-fileupload-content {

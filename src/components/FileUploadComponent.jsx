@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { FileUpload } from "primereact/fileupload";
 import { Dropdown } from "primereact/dropdown";
+import { Button } from "primereact/button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
@@ -375,6 +376,59 @@ export default forwardRef(function FileUploadComponent(
           maxFileSize={50000000}
           customUpload
           uploadHandler={customUploader}
+          itemTemplate={(file, props) => {
+            // Get the file extension in lowercase
+            const extension = file.name.split(".").pop()?.toLowerCase();
+
+            // Decide icon class
+            let iconClass = "pi pi-file"; // Default icon
+            if (extension === "pdf") {
+              iconClass = "pi pi-file-pdf"; // PDF icon
+            } else if (
+              ["png", "jpg", "jpeg", "gif", "bmp", "webp"].includes(extension)
+            ) {
+              iconClass = "pi pi-image"; // Image icon
+            }
+
+            return (
+              <div className='flex flex-row justify-between items-center w-full'>
+                <div className='flex flex-row justify-start items-center'>
+                  {/* Icon */}
+                  <i
+                    className={`${iconClass} mr-3 text-[var(--color-electric-blue)]`}
+                    style={{ fontSize: "20px" }}
+                  ></i>
+
+                  {/* File name */}
+                  <div className='flex flex-col text-[var(--color-text-primary)] items-start justify-center'>
+                    <p>{file.name.split("/").pop()}</p>
+                    <p className='text-xs text-[var(--color-text-secondary)]'>
+                      {(file.size / 1024).toFixed(2)} KB
+                    </p>
+                  </div>
+                </div>
+
+                {/* Remove button */}
+                <div className='flex flex-row justify-end items-center'>
+                  <Button
+                    icon='pi pi-times'
+                    className='p-button-text p-button-danger'
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      minWidth: "30px",
+                      minHeight: "30px",
+                      borderRadius: "100%",
+                    }}
+                    onClick={() => props.onRemove(file)}
+                  />
+                </div>
+              </div>
+            );
+          }}
+          /////////////
+          // Empty Template
+          //////////////
           emptyTemplate={
             <div
               className='flex flex-col items-center justify-center text-center h-full relative overflow-hidden rounded-xl border-2 border-dashed border-[var(--color-violet-blue)] p-4'

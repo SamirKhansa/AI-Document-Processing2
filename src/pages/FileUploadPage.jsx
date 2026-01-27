@@ -307,7 +307,7 @@ export default function FileUploadPage() {
         <div className='p-4 border-indigo-500/30'>
           <button
             onClick={() => navigate("/")}
-            className='w-full py-3 px-4 bg-[var(--color-core-indigo)] hover:bg-[var(--color-violet-blue)] text-white rounded-lg flex items-center justify-center gap-2 transition-colors font-semibold'
+            className='w-full py-3 px-4 bg-[var(--color-core-indigo)] hover:bg-[var(--color-core-indigo)]/75 text-white rounded-lg flex items-center justify-center gap-2 transition-colors font-semibold'
           >
             <i className='pi pi-home'></i>
             <span>Back to Home</span>

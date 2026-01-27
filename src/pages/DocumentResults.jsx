@@ -13,9 +13,9 @@ const DocumentResults = ({ onOpenViewer }) => {
 
   const industies = {
     Healthcare: ["QID", "Insurance Card"],
-    Finance: ["QID", "Passports"],
+    Finance: ["QID", "Passport"],
     Transportation: ["QID", "Driving License"],
-    Hospitality: ["QID", "Passports", "Driving License"],
+    Hospitality: ["QID", "Passport", "Driving License"],
   };
 
   const [resultsTitle, setResultsTitle] = React.useState("");
