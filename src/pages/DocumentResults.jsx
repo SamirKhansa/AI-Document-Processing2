@@ -11,9 +11,13 @@ const DocumentResults = ({ onOpenViewer }) => {
   const extractionResults = location.state?.extractionResults || [];
   const industry_name = location.state?.industry_name || "";
 
+  console.log("22222222222222222222222222222");
+  console.log(extractionResults);
+  console.log("22222222222222222222222222222");
+
   const industies = {
     Healthcare: ["QID", "Insurance Card"],
-    Finance: ["QID", "Passports"],
+    Finance: ["QID", "Passport"],
     Transportation: ["QID", "Driving License"],
     Hospitality: ["QID", "Passports", "Driving License"],
   };
