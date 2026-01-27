@@ -28,6 +28,12 @@ const DocumentResults = ({ onOpenViewer }) => {
   const resultsToDisplay =
     validationResults.length > 0 ? validationResults : sampleValidationResults;
 
+  const requiredDocs = industies[industry_name] || [];
+
+  const filteredResults = extractionResults.filter((doc) =>
+    requiredDocs.includes(doc.fileType),
+  );
+
   useEffect(() => {
     if (!industry_name) return;
 
@@ -82,7 +88,7 @@ const DocumentResults = ({ onOpenViewer }) => {
 
   const handleCardClick = (doc, index) => {
     onOpenViewer({
-      extractionResults,
+      extractionResults: filteredResults,
       ClickedIndex: index,
     });
   };
@@ -92,7 +98,7 @@ const DocumentResults = ({ onOpenViewer }) => {
 
   const handleGoToResults = () => {
     onOpenViewer({
-      extractionResults,
+      extractionResults: filteredResults,
       ClickedIndex: 0,
     });
   };
@@ -142,9 +148,11 @@ const DocumentResults = ({ onOpenViewer }) => {
       color: "#b0b0b0",
     },
     resultsGrid: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+      display: "flex",
+      flexWrap: "wrap",
       gap: "25px",
+      justifyContent: "center", // keeps cards centered
+      alignItems: "flex-start",
       width: "90%",
       maxWidth: "1600px",
       margin: "0 auto",
@@ -152,13 +160,14 @@ const DocumentResults = ({ onOpenViewer }) => {
     documentCard: {
       borderRadius: "12px",
       padding: "25px",
-      // border: "1px solid #444",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       cursor: "pointer",
       transition: "transform 0.3s ease, box-shadow 0.3s ease",
       boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
+      minWidth: "350px", // <-- keeps the original card width
+      maxWidth: "350px", // <-- optional: make all cards same width
     },
     cardHeader: {
       display: "flex",
@@ -256,7 +265,7 @@ const DocumentResults = ({ onOpenViewer }) => {
       </header>
 
       <div style={styles.resultsGrid}>
-        {resultsToDisplay.map((doc, index) => (
+        {filteredResults.map((doc, index) => (
           <div
             key={index}
             style={getCardStyle(index)}
