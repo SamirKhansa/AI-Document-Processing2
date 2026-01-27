@@ -77,7 +77,7 @@ const DocumentViewer = ({
             </button>
             <button
               onClick={() => navigate("/")}
-              className='ml-2 px-4 py-2 rounded-xl bg-(--color-core-indigo) hover:bg-(--color-violet-blue) flex items-center gap-2'
+              className='ml-2 px-4 py-2 rounded-xl bg-(--color-core-indigo) hover:bg-(--color-core-indigo)/75 flex items-center gap-2'
             >
               <i className='pi pi-home'></i>
               Home Page
