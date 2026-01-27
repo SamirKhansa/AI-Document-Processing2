@@ -1,0 +1,96 @@
+/* Make FileUpload fill its container */
+/* Where to change bg colors:
+    - File upload main body: .pfileupload
+    - File upload header: FileUploadComponent.jsx -> customHeader function*/
+
+.p-fileupload {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background:
+    linear-gradient(#100e29, #100e29) padding-box,
+    linear-gradient(135deg, #370fdd, #612df5, #cc47ab, #ff2a68, #fc7f40)
+      border-box;
+  overflow: hidden;
+}
+
+.p-fileupload-header {
+  border: none !important;
+  border-radius: 12px 12px 0 0;
+}
+
+.p-fileupload-buttonbar {
+  background-color: #100e29;
+  padding-left: 2rem;
+  border: 0px;
+}
+
+.p-fileupload-content {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+  background: transparent;
+  border: none;
+}
+
+.p-fileupload-advanced .p-fileupload-content {
+  min-height: 0;
+}
+
+.p-fileupload-choose {
+  background: linear-gradient(135deg, #370fdd 0%, #612df5 100%) !important;
+  color: white;
+  border: none;
+  height: 2.9rem;
+  border-radius: 8px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s !important;
+  box-shadow: 0 4px 6px rgba(55, 15, 221, 0.3) !important;
+}
+
+.p-fileupload-choose:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(55, 15, 221, 0.4) !important;
+}
+
+.p-button {
+  background: linear-gradient(135deg, #370fdd 0%, #612df5 100%) !important;
+  color: white;
+  border: none !important;
+  transition: transform 0.2s !important;
+}
+
+.p-button:hover {
+  transform: scale(1.05) !important;
+}
+
+.p-button-icon-only {
+  border-radius: 10000px;
+  background: linear-gradient(135deg, #370fdd 0%, #612df5 100%) !important;
+  padding: 0;
+  color: white;
+  border: none !important;
+}
+
+.p-button-icon-only:hover {
+  background: linear-gradient(135deg, #612df5 0%, #370fdd 100%) !important;
+  transform: rotate(90deg) !important;
+}
+
+.p-dropdown {
+  border: 2px solid #370fdd !important;
+  border-radius: 8px !important;
+  transition: all 0.2s !important;
+}
+
+.p-dropdown:hover {
+  border-color: #612df5 !important;
+  box-shadow: 0 2px 8px rgba(55, 15, 221, 0.2) !important;
+}

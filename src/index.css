@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --color-bg-primary: #0a091e;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgb(196, 196, 196);
+
+  --color-midnight-black: #0a091e;
+  --color-electric-blue: #0098ff;
+  --color-core-indigo: #370fdd;
+  --color-violet-blue: #612df5;
+  --color-magenta: #cc47ab;
+  --color-signal-red: #ff2a68;
+  --color-digital-orange: #fc7f40;
+
+  --font-headline: "Poppins", sans-serif;
+  --font-subheading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at top right, #1e1b4b, #0a0b1e 40%),
+    radial-gradient(circle at bottom left, #312e81, #0a0b1e 40%);
+  background-attachment: fixed;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1.1;
+  font-family: var(--font-headline);
+}
+
+h2,
+h3 {
+  font-family: var(--font-headline);
+}
+
+h4,
+h5 {
+  font-family: var(--font-subheading);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
