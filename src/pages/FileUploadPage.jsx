@@ -59,6 +59,7 @@ export default function FileUploadPage() {
     industryDocuments[industry] || industryDocuments.General;
 
   useEffect(() => {
+    // console.log("requiredDocuments", requiredDocuments);
     // Grab all files in public/sampleFiles
     const passports = import.meta.glob("/public/sampleFiles/passports/*");
     const qids = import.meta.glob("/public/sampleFiles/qid/*");
@@ -338,7 +339,7 @@ export default function FileUploadPage() {
           <FileUploadComponent
             ref={uploaderRef}
             industry={industry}
-            requiredDocuments={industryDocuments}
+            requiredDocuments={requiredDocuments}
           />
         </div>
       </div>

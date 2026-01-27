@@ -24,7 +24,10 @@ function isExpired(dateStr) {
   return date.endOf("day").isBefore(dayjs());
 }
 
-export default forwardRef(function FileUploadComponent({ industry }, ref) {
+export default forwardRef(function FileUploadComponent(
+  { industry, requiredDocuments },
+  ref,
+) {
   const navigate = useNavigate();
   const [selectedDocType, setSelectedDocType] = useState(null);
   const [modelsResults, setModelsResults] = useState([]); // format [{'filename': <str>, fileType: [Driving License, Passport, Insurance, QID], 'results': <obj>}]
@@ -312,6 +315,7 @@ export default forwardRef(function FileUploadComponent({ industry }, ref) {
         extractionResults: collectedResults,
         validationResults: validationResults,
         industry_name: industry_name,
+        requiredDocuments: requiredDocuments,
       },
     });
   };
