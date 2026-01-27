@@ -30,9 +30,18 @@ const DocumentResults = ({ onOpenViewer }) => {
 
   const requiredDocs = industies[industry_name] || [];
 
-  const filteredResults = extractionResults.filter((doc) =>
-    requiredDocs.includes(doc.fileType),
-  );
+  const filteredResults = extractionResults
+    .filter((doc) => requiredDocs.includes(doc.fileType))
+    .map((doc) => {
+      const validation = validationResults.find(
+        (v) => v.filename === doc.filename,
+      );
+      return {
+        ...doc,
+        isValid: validation?.isValid ?? true,
+        errorMessage: validation?.errorMessage ?? "",
+      };
+    });
 
   useEffect(() => {
     if (!industry_name) return;
@@ -274,18 +283,38 @@ const DocumentResults = ({ onOpenViewer }) => {
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <div style={styles.cardHeader}>
-              <p style={styles.filename}>{doc.filename.split(/[/\\]/).pop()}</p>
-              <StatusIcon isValid={doc.isValid} />
+            {/* --- Card Header with filename and status icon --- */}
+            <div
+              style={{
+                ...styles.cardHeader,
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <p style={styles.filename}>
+                  {doc.filename.split(/[/\\]/).pop()}
+                </p>
+                <StatusIcon isValid={doc.isValid} />
+              </div>
+
+              {/* --- Error message under filename if invalid --- */}
+              {!doc.isValid && doc.errorMessage && (
+                <p style={styles.errorMessage}>
+                  <strong>Error:</strong> {doc.errorMessage}
+                </p>
+              )}
             </div>
-            {!doc.isValid && doc.errorMessage && (
-              <p style={styles.errorMessage}>
-                <strong>Error:</strong> {doc.errorMessage}
-              </p>
-            )}
           </div>
         ))}
       </div>
+
       <div className="flex justify-center mt-10 gap-6">
         <button
           className="bg-transparent rounded-2xl p-6 text-[#c0c0e0] hover:text-white hover:bg-white/10 transition-all duration-300"
