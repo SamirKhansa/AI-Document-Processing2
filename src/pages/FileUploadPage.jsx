@@ -96,6 +96,18 @@ export default function FileUploadPage() {
     setSampleInsuranceCards(insuranceCardFiles);
   }, []);
 
+  // Reset mobile samples overlay on window resize to avoid desktop glitches
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setShowSamplesOnMobile(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleTouchStart = (e, fileName) => {
     const touch = e.touches[0];
     const clientX = touch.clientX;
@@ -338,7 +350,11 @@ export default function FileUploadPage() {
     >
       <Toast ref={toast} position='bottom-center' />
       <div
-        className={`w-full sm:w-1/4 h-full border-b sm:border-b-0 sm:border-r border-indigo-500/30 flex flex-col transition-all duration-300 ${showSamplesOnMobile ? "fixed inset-0 z-50 bg-(--color-midnight-black)" : "hidden sm:flex"}`}
+        className={`flex flex-col border-indigo-500/30 transition-all duration-300 ${
+          showSamplesOnMobile
+            ? "fixed inset-0 z-50 bg-(--color-midnight-black) w-full h-full"
+            : "hidden sm:flex sm:w-1/4 h-full sm:border-r"
+        }`}
       >
         <div className='flex items-center justify-end p-4 sm:hidden'>
           <button
