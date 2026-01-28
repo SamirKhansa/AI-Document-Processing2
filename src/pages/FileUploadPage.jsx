@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Toast } from "primereact/toast";
 import FileUploadComponent from "../components/FileUploadComponent";
 
 // const sampleFiles = [
@@ -20,6 +21,7 @@ export default function FileUploadPage() {
   const [touchPosition, setTouchPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const touchTimerRef = useRef(null);
+  const toast = useRef(null);
 
   const [showSamplesOnMobile, setShowSamplesOnMobile] = useState(false);
   const [samplePassports, setSamplePassports] = useState([]);
@@ -156,6 +158,35 @@ export default function FileUploadPage() {
     setDraggedFile(null);
   };
 
+  const handleSampleClick = async (file) => {
+    if (uploaderRef.current) {
+      const status = await uploaderRef.current.addFileToUploader(file.path);
+
+      if (status === "added") {
+        toast.current?.show({
+          severity: "success",
+          summary: "File Added",
+          detail: `${file.name} added to upload`,
+          life: 2000,
+        });
+      } else if (status === "duplicate") {
+        toast.current?.show({
+          severity: "warn",
+          summary: "Already Added",
+          detail: `${file.name} is already in the list`,
+          life: 2000,
+        });
+      } else if (status === "error") {
+        toast.current?.show({
+          severity: "error",
+          summary: "Upload Error",
+          detail: `Failed to add ${file.name}`,
+          life: 3000,
+        });
+      }
+    }
+  };
+
   const mapSampleFiles = (document_type, key) => {
     switch (document_type) {
       case "Passport":
@@ -175,11 +206,7 @@ export default function FileUploadPage() {
                   e.dataTransfer.setData("filename", file.path);
                 }}
                 onTouchStart={(e) => handleTouchStart(e, file.path)}
-                onClick={() => {
-                  if (uploaderRef.current) {
-                    uploaderRef.current.addFileToUploader(file.path);
-                  }
-                }}
+                onClick={() => handleSampleClick(file)}
               >
                 <div className='flex items-center gap-3'>
                   <i
@@ -213,11 +240,7 @@ export default function FileUploadPage() {
                   e.dataTransfer.setData("filename", file.path);
                 }}
                 onTouchStart={(e) => handleTouchStart(e, file.path)}
-                onClick={() => {
-                  if (uploaderRef.current) {
-                    uploaderRef.current.addFileToUploader(file.path);
-                  }
-                }}
+                onClick={() => handleSampleClick(file)}
               >
                 <div className='flex items-center gap-3'>
                   <i
@@ -251,11 +274,7 @@ export default function FileUploadPage() {
                   e.dataTransfer.setData("filename", file.path);
                 }}
                 onTouchStart={(e) => handleTouchStart(e, file.path)}
-                onClick={() => {
-                  if (uploaderRef.current) {
-                    uploaderRef.current.addFileToUploader(file.path);
-                  }
-                }}
+                onClick={() => handleSampleClick(file)}
               >
                 <div className='flex items-center gap-3'>
                   <i
@@ -289,11 +308,7 @@ export default function FileUploadPage() {
                   e.dataTransfer.setData("filename", file.path);
                 }}
                 onTouchStart={(e) => handleTouchStart(e, file.path)}
-                onClick={() => {
-                  if (uploaderRef.current) {
-                    uploaderRef.current.addFileToUploader(file.path);
-                  }
-                }}
+                onClick={() => handleSampleClick(file)}
               >
                 <div className='flex items-center gap-3'>
                   <i
@@ -321,14 +336,14 @@ export default function FileUploadPage() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
+      <Toast ref={toast} position='bottom-center' />
       <div
         className={`w-full sm:w-1/4 h-full border-b sm:border-b-0 sm:border-r border-indigo-500/30 flex flex-col transition-all duration-300 ${showSamplesOnMobile ? "fixed inset-0 z-50 bg-(--color-midnight-black)" : "hidden sm:flex"}`}
       >
-        <div className='flex items-center justify-between p-4 sm:hidden'>
-          <h2 className='text-xl font-bold text-white'>Sample Files</h2>
+        <div className='flex items-center justify-end p-4 sm:hidden'>
           <button
             onClick={() => setShowSamplesOnMobile(false)}
-            className='text-white p-2'
+            className='text-white p-2 '
           >
             <i className='pi pi-times'></i>
           </button>

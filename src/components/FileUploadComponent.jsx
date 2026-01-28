@@ -171,12 +171,14 @@ export default forwardRef(function FileUploadComponent(
 
       if (isDuplicate) {
         console.warn(`File ${filename} is already in the list.`);
-        return;
+        return "duplicate";
       }
 
       fileUploadRef.current.setFiles([...currentFiles, file]);
+      return "added";
     } catch (err) {
       console.error("Error adding file to uploader:", err);
+      return "error";
     }
   };
 

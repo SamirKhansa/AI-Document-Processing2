@@ -147,3 +147,76 @@
   border-color: #612df5 !important;
   box-shadow: 0 2px 8px rgba(55, 15, 221, 0.2) !important;
 }
+
+/* Custom Toast Styling */
+.p-toast {
+  opacity: 1;
+}
+
+.p-toast .p-toast-message {
+  background: rgba(10, 9, 30, 0.9) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(97, 45, 245, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
+  margin-bottom: 1rem;
+}
+
+.p-toast .p-toast-message.p-toast-message-success {
+  border-left: 4px solid var(--color-electric-blue) !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-warn {
+  border-left: 4px solid var(--color-digital-orange) !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  border-left: 4px solid var(--color-signal-red) !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content {
+  padding: 1.25rem !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-success .p-toast-message-icon {
+  color: var(--color-electric-blue) !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-warn .p-toast-message-icon {
+  color: var(--color-digital-orange) !important;
+}
+
+.p-toast .p-toast-message.p-toast-message-error .p-toast-message-icon {
+  color: var(--color-signal-red) !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-icon {
+  font-size: 1.5rem !important;
+}
+
+.p-toast .p-toast-message .p-toast-summary {
+  color: var(--color-text-primary) !important;
+  font-family: var(--font-headline) !important;
+  font-weight: 600 !important;
+  margin-left: 0.5rem !important;
+}
+
+.p-toast .p-toast-message .p-toast-detail {
+  color: var(--color-text-secondary) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.875rem !important;
+  margin-top: 0.25rem !important;
+  margin-left: 0.5rem !important;
+}
+
+.p-toast .p-toast-icon-close {
+  color: var(--color-text-secondary) !important;
+  transition: color 0.2s !important;
+}
+
+.p-toast .p-toast-icon-close:hover {
+  color: var(--color-text-primary) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
