@@ -195,7 +195,7 @@ const DocumentResults = ({ onOpenViewer }) => {
       flexShrink: 0,
     },
     errorMessage: {
-      color: "#ff8a8a",
+      color: "#f3a9a9",
       fontSize: "0.95rem",
       marginTop: "15px",
       backgroundColor: "rgba(255, 100, 100, 0.1)",
@@ -299,7 +299,7 @@ const DocumentResults = ({ onOpenViewer }) => {
                 }}
               >
                 <p style={styles.filename}>
-                  {doc.filename.split(/[/\\]/).pop()}
+                  {doc.fileType.split(/[/\\]/).pop()}
                 </p>
                 <StatusIcon isValid={doc.isValid} />
               </div>
@@ -307,7 +307,7 @@ const DocumentResults = ({ onOpenViewer }) => {
               {/* --- Error message under filename if invalid --- */}
               {!doc.isValid && doc.errorMessage && (
                 <p style={styles.errorMessage}>
-                  <strong>Error:</strong> {doc.errorMessage}
+                  <strong>Warning:</strong> {doc.errorMessage}
                 </p>
               )}
             </div>
