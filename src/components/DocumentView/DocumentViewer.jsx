@@ -43,7 +43,7 @@ const DocumentViewer = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="truncate">
             <h1 className="text-lg sm:text-xl font-bold truncate py-1">
-              {currentDoc?.filename.split(/[/\\]/).pop() || "Untitled"}
+              {currentDoc?.filetype.split(/[/\\]/).pop() || "Untitled"}
               <span className="text-(--color-violet-blue) ml-2">
                 #{currentIndex + 1}
               </span>
