@@ -19,6 +19,7 @@ export default function FileUploadPage() {
   const [draggedFile, setDraggedFile] = useState(null);
   const [touchPosition, setTouchPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  const touchTimerRef = useRef(null);
 
   const [showSamplesOnMobile, setShowSamplesOnMobile] = useState(false);
   const [samplePassports, setSamplePassports] = useState([]);
@@ -95,18 +96,42 @@ export default function FileUploadPage() {
 
   const handleTouchStart = (e, fileName) => {
     const touch = e.touches[0];
-    setDraggedFile(fileName);
-    setTouchPosition({ x: touch.clientX, y: touch.clientY });
-    setIsDragging(true);
+    const clientX = touch.clientX;
+    const clientY = touch.clientY;
+
+    // Clear any existing timer just in case
+    if (touchTimerRef.current) clearTimeout(touchTimerRef.current);
+
+    // Set a timer to start the drag after 500ms (the threshold)
+    touchTimerRef.current = setTimeout(() => {
+      setDraggedFile(fileName);
+      setTouchPosition({ x: clientX, y: clientY });
+      setIsDragging(true);
+    }, 500); // 500ms threshold
   };
 
   const handleTouchMove = (e) => {
-    if (!isDragging) return;
     const touch = e.touches[0];
+
+    if (!isDragging) {
+      // If we move too much before the timer fires, cancel the drag (assume user is scrolling)
+      if (touchTimerRef.current) {
+        clearTimeout(touchTimerRef.current);
+        touchTimerRef.current = null;
+      }
+      return;
+    }
+
     setTouchPosition({ x: touch.clientX, y: touch.clientY });
   };
 
   const handleTouchEnd = (e) => {
+    // Clear the timer if it hasn't fired yet
+    if (touchTimerRef.current) {
+      clearTimeout(touchTimerRef.current);
+      touchTimerRef.current = null;
+    }
+
     if (!isDragging) return;
 
     // Check if dropped on designated drop zone
