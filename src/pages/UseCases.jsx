@@ -38,9 +38,9 @@ const UseCases = () => {
 
   const useCaseCards = [
     {
-      title: "Document processing",
+      title: "DocIQ",
       description:
-        "Automate the extraction of data from passports, IDs, and invoices with 99% accuracy.",
+        "Automate the extraction of data from passports, IDs, and other documents with high accuracy.",
       icon: <FileText className='w-8 h-8' />,
       onClick: handleDocIQClick,
       // Using project theme colors for distinct hover effects
