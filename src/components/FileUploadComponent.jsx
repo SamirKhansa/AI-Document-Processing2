@@ -349,13 +349,13 @@ export default forwardRef(function FileUploadComponent(
   const uploadComponent = () => (
     <div
       id='drop-zone-container'
-      className='flex flex-col w-full h-full justify-center items-center p-4 sm:p-8'
+      className='flex flex-col w-full min-h-full justify-start sm:justify-center items-center p-4 sm:p-8 pt-10 sm:pt-8'
       onDropCapture={handleDrop}
       onDragOverCapture={handleDragOver}
     >
       <div className='flex flex-col items-center justify-center mb-6'>
-        <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-center'>
-          <span className='text-5xl bg-gradient-to-r from-[var(--color-core-indigo)] to-[var(--color-signal-red)] bg-clip-text text-transparent'>
+        <h1 className='text-xl sm:text-3xl md:text-4xl font-bold mb-2 text-center'>
+          <span className='text-3xl sm:text-5xl bg-gradient-to-r from-(--color-core-indigo) to-(--color-signal-red) bg-clip-text text-transparent'>
             {industry_name}
           </span>
         </h1>
@@ -365,7 +365,7 @@ export default forwardRef(function FileUploadComponent(
         </p>
       </div>
 
-      <div className='flex flex-1 w-full lg:w-3/4 h-auto sm:h-2/5 p-2'>
+      <div className='flex-1 w-full lg:w-3/4 h-full p-2'>
         <FileUpload
           ref={fileUploadRef}
           className='w-full h-full'
@@ -431,13 +431,13 @@ export default forwardRef(function FileUploadComponent(
           //////////////
           emptyTemplate={
             <div
-              className='flex flex-col items-center justify-center text-center h-full relative overflow-hidden rounded-xl border-2 border-dashed border-[var(--color-violet-blue)] p-4'
+              className='flex flex-col h-full w-full md:min-h-[275px] items-center justify-center text-center relative overflow-hidden rounded-xl border-2 border-dashed border-[var(--color-violet-blue)] p-4'
               style={{
                 background:
                   "linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)",
               }}
             >
-              <div className='absolute top-2 right-2 bg-gradient-to-r from-[var(--color-core-indigo)] to-[var(--color-signal-red)] text-white px-3 py-1.5 rounded-lg text-xs font-semibold'>
+              <div className='absolute top-2 right-2 mb-3 md:mb-0 bg-gradient-to-r from-[var(--color-core-indigo)] to-[var(--color-signal-red)] text-white px-3 py-1.5 rounded-lg text-xs font-semibold'>
                 AI Powered
               </div>
               <i
