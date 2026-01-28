@@ -195,10 +195,10 @@ const DocumentResults = ({ onOpenViewer }) => {
       flexShrink: 0,
     },
     errorMessage: {
-      color: "#f3a9a9",
+      // color: "#f3a9a9",
       fontSize: "0.95rem",
       marginTop: "15px",
-      backgroundColor: "rgba(255, 100, 100, 0.1)",
+      // backgroundColor: "rgba(255, 100, 100, 0.1)",
       padding: "10px",
       borderRadius: "6px",
     },
@@ -229,7 +229,7 @@ const DocumentResults = ({ onOpenViewer }) => {
     <span
       style={{ ...styles.statusIcon, color: isValid ? "#33d6a2" : "#ff6b6b" }}
     >
-      {isValid ? <i className="pi pi-check"></i> : ""}
+      {isValid ? <i className='pi pi-check'></i> : ""}
     </span>
   );
 
@@ -263,7 +263,7 @@ const DocumentResults = ({ onOpenViewer }) => {
       <header style={styles.header}>
         <h1 style={styles.mainTitle}>
           AI Document{" "}
-          <span className="bg-gradient-to-r from-[var(--color-core-indigo)] to-[var(--color-signal-red)] bg-clip-text text-transparent">
+          <span className='bg-gradient-to-r from-[var(--color-core-indigo)] to-[var(--color-signal-red)] bg-clip-text text-transparent'>
             Processing Results
           </span>
         </h1>
@@ -278,7 +278,7 @@ const DocumentResults = ({ onOpenViewer }) => {
           <div
             key={index}
             style={getCardStyle(index)}
-            className="bg-white/5 border-white/10"
+            className='bg-white/5 border-white/10'
             onClick={() => handleCardClick(doc, index)}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
@@ -306,7 +306,10 @@ const DocumentResults = ({ onOpenViewer }) => {
 
               {/* --- Error message under filename if invalid --- */}
               {!doc.isValid && doc.errorMessage && (
-                <p style={styles.errorMessage}>
+                <p
+                  style={styles.errorMessage}
+                  className='bg-amber-700/50 text-white/70'
+                >
                   <strong>Warning:</strong> {doc.errorMessage}
                 </p>
               )}
@@ -315,9 +318,9 @@ const DocumentResults = ({ onOpenViewer }) => {
         ))}
       </div>
 
-      <div className="flex justify-center mt-10 gap-6">
+      <div className='flex justify-center mt-10 gap-6'>
         <button
-          className="bg-transparent rounded-2xl p-6 text-[#c0c0e0] hover:text-white hover:bg-white/10 transition-all duration-300"
+          className='bg-transparent rounded-2xl p-6 text-[#c0c0e0] hover:text-white hover:bg-white/10 transition-all duration-300'
           style={{ border: "1px solid #FFFFFF33" }}
           onClick={handleGoHome}
         >
@@ -325,7 +328,7 @@ const DocumentResults = ({ onOpenViewer }) => {
         </button>
 
         <button
-          className="bg-(--color-core-indigo) rounded-2xl p-6 text-(--color-text-primary) hover:text-white hover:bg-(--color-core-indigo)/75 transition-all duration-300"
+          className='bg-(--color-core-indigo) rounded-2xl p-6 text-(--color-text-primary) hover:text-white hover:bg-(--color-core-indigo)/75 transition-all duration-300'
           onClick={handleGoToResults}
         >
           View Results
