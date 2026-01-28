@@ -20,6 +20,7 @@ export default function FileUploadPage() {
   const [touchPosition, setTouchPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
 
+  const [showSamplesOnMobile, setShowSamplesOnMobile] = useState(false);
   const [samplePassports, setSamplePassports] = useState([]);
   const [sampleQids, setSampleQids] = useState([]);
   const [sampleDrivingLicenses, setSampleDrivingLicenses] = useState([]);
@@ -141,7 +142,7 @@ export default function FileUploadPage() {
             {samplePassports.map((file, index) => (
               <div
                 key={index}
-                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-[var(--color-core-indigo)]'
+                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-(--color-core-indigo)'
                 draggable='true'
                 style={{ touchAction: "none" }}
                 onDragStart={(e) => {
@@ -157,7 +158,7 @@ export default function FileUploadPage() {
               >
                 <div className='flex items-center gap-3'>
                   <i
-                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-[var(--color-signal-red)]" : "pi-image text-[var(--color-electric-blue)]"} text-2xl`}
+                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-(--color-signal-red)" : "pi-image text-(--color-electric-blue)"} text-2xl`}
                   ></i>
                   <span
                     className='text-sm text-gray-200 truncate'
@@ -179,7 +180,7 @@ export default function FileUploadPage() {
             {sampleQids.map((file, index) => (
               <div
                 key={index}
-                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-[var(--color-core-indigo)]'
+                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-(--color-core-indigo)'
                 draggable='true'
                 style={{ touchAction: "none" }}
                 onDragStart={(e) => {
@@ -195,7 +196,7 @@ export default function FileUploadPage() {
               >
                 <div className='flex items-center gap-3'>
                   <i
-                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-[var(--color-signal-red)]" : "pi-image text-[var(--color-electric-blue)]"} text-2xl`}
+                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-(--color-signal-red)" : "pi-image text-(--color-electric-blue)"} text-2xl`}
                   ></i>
                   <span
                     className='text-sm text-gray-200 truncate'
@@ -217,7 +218,7 @@ export default function FileUploadPage() {
             {sampleDrivingLicenses.map((file, index) => (
               <div
                 key={index}
-                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-[var(--color-core-indigo)]'
+                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-(--color-core-indigo)'
                 draggable='true'
                 style={{ touchAction: "none" }}
                 onDragStart={(e) => {
@@ -233,7 +234,7 @@ export default function FileUploadPage() {
               >
                 <div className='flex items-center gap-3'>
                   <i
-                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-[var(--color-signal-red)]" : "pi-image text-[var(--color-electric-blue)]"} text-2xl`}
+                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-(--color-signal-red)" : "pi-image text-(--color-electric-blue)"} text-2xl`}
                   ></i>
                   <span
                     className='text-sm text-gray-200 truncate'
@@ -255,7 +256,7 @@ export default function FileUploadPage() {
             {sampleInsuranceCards.map((file, index) => (
               <div
                 key={index}
-                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-[var(--color-core-indigo)]'
+                className='p-3 mb-2 bg-white/5 rounded-lg cursor-grab hover:bg-gray-800 transition-colors border border-gray-700 hover:border-(--color-core-indigo)'
                 draggable='true'
                 style={{ touchAction: "none" }}
                 onDragStart={(e) => {
@@ -271,7 +272,7 @@ export default function FileUploadPage() {
               >
                 <div className='flex items-center gap-3'>
                   <i
-                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-[var(--color-signal-red)]" : "pi-image text-[var(--color-electric-blue)]"} text-2xl`}
+                    className={`pi ${file.name.endsWith(".pdf") ? "pi-file-pdf text-(--color-signal-red)" : "pi-image text-(--color-electric-blue)"} text-2xl`}
                   ></i>
                   <span
                     className='text-sm text-gray-200 truncate'
@@ -291,11 +292,22 @@ export default function FileUploadPage() {
 
   return (
     <div
-      className='flex flex-row h-screen w-screen relative overflow-hidden'
+      className='flex flex-col sm:flex-row h-screen w-screen relative overflow-hidden'
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className='w-full sm:w-1/4 h-full border-r border-indigo-500/30 flex flex-col'>
+      <div
+        className={`w-full sm:w-1/4 h-full border-b sm:border-b-0 sm:border-r border-indigo-500/30 flex flex-col transition-all duration-300 ${showSamplesOnMobile ? "fixed inset-0 z-50 bg-(--color-midnight-black)" : "hidden sm:flex"}`}
+      >
+        <div className='flex items-center justify-between p-4 sm:hidden'>
+          <h2 className='text-xl font-bold text-white'>Sample Files</h2>
+          <button
+            onClick={() => setShowSamplesOnMobile(false)}
+            className='text-white p-2'
+          >
+            <i className='pi pi-times'></i>
+          </button>
+        </div>
         <div className='flex-1 overflow-y-auto p-4'>
           <h2 className='text-xl font-bold text-white mb-4'>Sample Files</h2>
           <div className='grid grid-cols-1 gap-4'>
@@ -307,14 +319,27 @@ export default function FileUploadPage() {
         <div className='p-4 border-indigo-500/30'>
           <button
             onClick={() => navigate("/")}
-            className='w-full py-3 px-4 bg-[var(--color-core-indigo)] hover:bg-[var(--color-core-indigo)]/75 text-white rounded-lg flex items-center justify-center gap-2 transition-colors font-semibold'
+            className='w-full py-3 px-4 bg-(--color-core-indigo) hover:bg-(--color-core-indigo)/75 text-white rounded-lg flex items-center justify-center gap-2 transition-colors font-semibold'
           >
             <i className='pi pi-home'></i>
             <span>Back to Home</span>
           </button>
         </div>
       </div>
-      <div className='hidden sm:flex sm:w-3/4 h-full overflow-hidden pl-5 pr-5 pt-2 pb-2 flex-col'>
+      <div className='flex w-full sm:w-3/4 h-full overflow-y-auto pl-4 pr-4 sm:pl-5 sm:pr-5 pt-2 pb-2 flex-col relative'>
+        {/* Mobile Toggle Button */}
+        <div className='flex sm:hidden justify-between items-center p-4'>
+          <button onClick={() => navigate("/")} className='p-2 text-white'>
+            <i className='pi pi-chevron-left'></i>
+          </button>
+          <button
+            onClick={() => setShowSamplesOnMobile(true)}
+            className='px-4 py-2 bg-white/10 rounded-full text-xs font-semibold text-white border border-white/20'
+          >
+            <i className='pi pi-file mr-2'></i>
+            Try Sample Files
+          </button>
+        </div>
         {/* Industry Indicator Section */}
         <div className='mb-2 pr-5 pt-5  rounded-xl border-transparent backdrop-blur'>
           <div className='flex items-center justify-end flex-wrap gap-4'>
@@ -322,10 +347,10 @@ export default function FileUploadPage() {
               {requiredDocuments.map((doc, idx) => (
                 <div
                   key={idx}
-                  className='flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-[var(--color-violet-blue)]/50 transition-all'
+                  className='flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-(--color-violet-blue)/50 transition-all'
                 >
                   <i
-                    className={`pi ${doc.icon} text-[var(--color-electric-blue)]`}
+                    className={`pi ${doc.icon} text-(--color-electric-blue)`}
                   ></i>
                   <span className='text-sm text-gray-300'>{doc.name}</span>
                 </div>
@@ -335,7 +360,7 @@ export default function FileUploadPage() {
         </div>
 
         {/* File Upload Component */}
-        <div className='flex-1 overflow-hidden'>
+        <div className='flex-1'>
           <FileUploadComponent
             ref={uploaderRef}
             industry={industry}

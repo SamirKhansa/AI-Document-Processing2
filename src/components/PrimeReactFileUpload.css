@@ -17,6 +17,10 @@
   overflow: hidden;
 }
 
+/* Set specific height for large screens */
+@media (min-width: 1024px) {
+}
+
 .p-fileupload-header {
   background-color: #100e29 !important;
   border: none !important;
@@ -25,8 +29,18 @@
 
 .p-fileupload-buttonbar {
   background-color: #100e29;
-  padding-left: 2rem;
+  padding: 0.75rem !important;
   border: 0px;
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .p-fileupload-buttonbar {
+    padding-left: 2rem !important;
+    gap: 1rem;
+  }
 }
 
 .p-fileupload-content {
@@ -55,22 +69,27 @@
 }
 
 .p-fileupload-advanced .p-fileupload-content {
-  min-height: 0;
+  /* min-height:; */
 }
 
-.p-fileupload-choose {
+.p-fileupload-choose,
+.p-fileupload-header .p-button {
   background: linear-gradient(135deg, #370fdd 0%, #612df5 100%) !important;
-  color: white;
-  border: none;
-  height: 2.9rem;
-  border-radius: 8px;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s !important;
+  color: white !important;
+  border: none !important;
+  height: 2.75rem !important;
+  border-radius: 9px !important;
+  padding: 0 1.25rem !important;
+  transition: all 0.2s ease !important;
   box-shadow: 0 4px 6px rgba(55, 15, 221, 0.3) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
 }
 
-.p-fileupload-choose:hover {
+.p-fileupload-choose:hover,
+.p-fileupload-header .p-button:hover:not(:disabled) {
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 12px rgba(55, 15, 221, 0.4) !important;
 }
@@ -97,6 +116,25 @@
 .p-button-icon-only:hover {
   background: linear-gradient(135deg, #612df5 0%, #370fdd 100%) !important;
   transform: rotate(90deg) !important;
+}
+
+/* Hide labels on mobile to fit buttons better */
+@media (max-width: 640px) {
+  .p-fileupload-choose .p-button-label,
+  .p-fileupload-header .p-button-label {
+    display: none !important;
+  }
+
+  .p-fileupload-choose,
+  .p-fileupload-header .p-button {
+    padding: 0 !important;
+    width: 2.75rem !important;
+  }
+
+  .p-fileupload-choose .p-button-icon,
+  .p-fileupload-header .p-button .p-button-icon {
+    margin: 0 !important;
+  }
 }
 
 .p-dropdown {
