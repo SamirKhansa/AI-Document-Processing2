@@ -39,9 +39,9 @@ export default function HomePage() {
       {/* Hero Section */}
       <div className='max-w-6xl mx-auto px-6 pt-24 pb-16 text-center'>
         <h1 className='text-4xl md:text-6xl font-semibold tracking-tight'>
-          <span className='text-white text-5xl md:text-6xl'>AI Document</span>{" "}
+          <span className='text-white text-5xl md:text-6xl'></span>{" "}
           <span className='text-5xl md:text-6xl bg-[linear-gradient(90deg,var(--color-electric-blue),var(--color-violet-blue),var(--color-magenta),var(--color-digital-orange))] bg-clip-text text-transparent'>
-            Processing
+            DocIQ
           </span>
         </h1>
 
