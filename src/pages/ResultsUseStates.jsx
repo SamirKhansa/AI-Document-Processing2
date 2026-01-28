@@ -6,7 +6,7 @@ const ResultsUseStates = ({ externalState, onOpenViewer }) => {
   const extractionResults = externalState?.extractionResults;
   const ClickedIndex = externalState?.ClickedIndex;
   const [uploadedDocs, setUploadedDocs] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(ClickedIndex);
+  const [currentIndex, setCurrentIndex] = useState(ClickedIndex ?? 0);
 
   // Guard
   if (!extractionResults) {
@@ -17,6 +17,7 @@ const ResultsUseStates = ({ externalState, onOpenViewer }) => {
     const docs = extractionResultsList.map((item) => ({
       file: item.file, // must be a File object
       filename: item.filename,
+      filetype: item.fileType,
       extractedData: item.results || {},
       isProcessing: false,
       invalidDocumentError: false,
