@@ -372,7 +372,7 @@ export default function FileUploadPage() {
             )}
           </div>
         </div>
-        <div className='p-4 border-indigo-500/30'>
+        <div className='p-4 border-indigo-500/30 hidden sm:block'>
           <button
             onClick={() => navigate("/")}
             className='w-full py-3 px-4 bg-(--color-core-indigo) hover:bg-(--color-core-indigo)/75 text-white rounded-lg flex items-center justify-center gap-2 transition-colors font-semibold'
