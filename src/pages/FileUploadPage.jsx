@@ -31,6 +31,7 @@ export default function FileUploadPage() {
 
   // Extract industry from navigation state, default to "General"
   const industry = location.state?.industry || "General";
+  const business_name = location.state?.name || "General";
 
   // Define required documents for each industry
   const industryDocuments = {
@@ -420,6 +421,7 @@ export default function FileUploadPage() {
           <FileUploadComponent
             ref={uploaderRef}
             industry={industry}
+            business_name={business_name}
             requiredDocuments={requiredDocuments}
           />
         </div>

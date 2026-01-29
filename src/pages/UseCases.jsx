@@ -1,6 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FileText, BrainCircuit, ShieldCheck } from "lucide-react";
+import {
+  FileText,
+  BrainCircuit,
+  ShieldCheck,
+  UserCircle,
+  Bot,
+} from "lucide-react";
 
 /**
  * UseCases Page - Displays 3 core business use cases with interactive cards.
@@ -11,29 +17,26 @@ const UseCases = () => {
   // Helper functions for each card's redirection logic
   const handleDocIQClick = () => {
     console.log("Navigating to DocIQ App...");
-    window.open(
-      "https://api-frontend-qc-01-b5hcdkguawepeecs.qatarcentral-01.azurewebsites.net/",
-      "_blank",
-      "noopener,noreferrer",
-    );
+    // window.open(
+    //   "https://api-frontend-qc-01-b5hcdkguawepeecs.qatarcentral-01.azurewebsites.net/",
+    //   "_blank",
+    //   "noopener,noreferrer",
+    // );
+    navigate("/doc-iq");
   };
 
-  const handleAIAnalysisClick = () => {
-    console.log("Navigating to AI Analysis App...");
-    window.open(
-      "https://api-frontend-qc-01-b5hcdkguawepeecs.qatarcentral-01.azurewebsites.net/",
-      "_blank",
-      "noopener,noreferrer",
-    );
-  };
+  // const handleAIAnalysisClick = () => {
+  //   console.log("Navigating to AI Analysis App...");
+  //   window.open(
+  //     "https://api-frontend-qc-01-b5hcdkguawepeecs.qatarcentral-01.azurewebsites.net/",
+  //     "_blank",
+  //     "noopener,noreferrer",
+  //   );
+  // };
 
-  const handleComplianceClick = () => {
+  const handleSalesAvatarClick = () => {
     console.log("Navigating to Regulatory Compliance App...");
-    window.open(
-      "https://api-frontend-qc-01-b5hcdkguawepeecs.qatarcentral-01.azurewebsites.net/",
-      "_blank",
-      "noopener,noreferrer",
-    );
+    navigate("/doc-iq");
   };
 
   const useCaseCards = [
@@ -49,23 +52,23 @@ const UseCases = () => {
       accentColor: "text-[var(--color-electric-blue)]",
       iconBg: "bg-[var(--color-electric-blue)]/10",
     },
+    // {
+    //   title: "Use Case 2",
+    //   description:
+    //     "Harness AI to analyze document patterns and provide actionable business intelligence.",
+    //   icon: <BrainCircuit className='w-8 h-8' />,
+    //   onClick: handleAIAnalysisClick,
+    //   hoverStyles:
+    //     "hover:bg-[var(--color-violet-blue)]/20 hover:border-[var(--color-violet-blue)]/50",
+    //   accentColor: "text-[var(--color-violet-blue)]",
+    //   iconBg: "bg-[var(--color-violet-blue)]/10",
+    // },
     {
-      title: "Use Case 2",
+      title: "Sales Avatar",
       description:
-        "Harness AI to analyze document patterns and provide actionable business intelligence.",
-      icon: <BrainCircuit className='w-8 h-8' />,
-      onClick: handleAIAnalysisClick,
-      hoverStyles:
-        "hover:bg-[var(--color-violet-blue)]/20 hover:border-[var(--color-violet-blue)]/50",
-      accentColor: "text-[var(--color-violet-blue)]",
-      iconBg: "bg-[var(--color-violet-blue)]/10",
-    },
-    {
-      title: "Use Case 3",
-      description:
-        "Ensure all processed documents meet international standards and safety protocols.",
-      icon: <ShieldCheck className='w-8 h-8' />,
-      onClick: handleComplianceClick,
+        "Automate customer conversations, qualify leads, and drive sales with an intelligent AI sales avatar.",
+      icon: <Bot className='w-8 h-8' />,
+      onClick: handleSalesAvatarClick,
       hoverStyles:
         "hover:bg-[var(--color-magenta)]/20 hover:border-[var(--color-magenta)]/50",
       accentColor: "text-[var(--color-magenta)]",
@@ -96,7 +99,7 @@ const UseCases = () => {
           </p>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 '>
           {useCaseCards.map((card, index) => (
             <div
               key={index}
