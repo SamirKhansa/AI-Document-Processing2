@@ -35,8 +35,11 @@ const UseCases = () => {
   // };
 
   const handleSalesAvatarClick = () => {
-    console.log("Navigating to Regulatory Compliance App...");
-    navigate("/doc-iq");
+    console.log("Navigating to Sales Avatar App...");
+    window.location.href =
+      "https://as-ict-avatar-sw-bmfrenfja4bpa3a9.swedencentral-01.azurewebsites.net/";
+
+    // navigate("/doc-iq");
   };
 
   const useCaseCards = [
