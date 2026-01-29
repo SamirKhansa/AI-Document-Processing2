@@ -3,23 +3,27 @@ import { HeartPulse, Landmark, Truck, Hotel } from "lucide-react";
 
 const industries = [
   {
-    name: "Healthcare",
+    name: "Hospital Al Hayat",
+    industry: "Healthcare",
     icon: HeartPulse,
     description:
       "Clinical documents, medical records, and compliance workflows",
   },
   {
-    name: "Finance",
+    name: "Qatar Venture Capital",
+    industry: "Finance",
     icon: Landmark,
     description: "Invoices, statements, KYC, and regulatory documents",
   },
   {
-    name: "Transportation",
+    name: "Doha Rent A Car",
+    industry: "Transportation",
     icon: Truck,
     description: "Car rentals, driver documents, and fleet management",
   },
   {
-    name: "Hospitality",
+    name: "The Grand Hotel",
+    industry: "Hospitality",
     icon: Hotel,
     description: "Reservations, contracts, and guest documentation",
   },
@@ -28,9 +32,9 @@ const industries = [
 export default function HomePage() {
   const navigate = useNavigate();
 
-  const handleSelectIndustry = (industry) => {
+  const handleSelectIndustry = (business_name, industry) => {
     navigate("/file-upload", {
-      state: { industry },
+      state: { name: business_name, industry: industry },
     });
   };
 
@@ -60,7 +64,9 @@ export default function HomePage() {
             return (
               <button
                 key={industry.name}
-                onClick={() => handleSelectIndustry(industry.name)}
+                onClick={() =>
+                  handleSelectIndustry(industry.name, industry.industry)
+                }
                 className='
                   group text-left rounded-2xl p-6
                   bg-white/5 backdrop-blur

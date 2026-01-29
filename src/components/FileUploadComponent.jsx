@@ -18,6 +18,7 @@ import "./PrimeReactFileUpload.css";
 dayjs.extend(customParseFormat);
 
 function isExpired(dateStr) {
+  if (dateStr === "0000-00-00") return true; //since this counts as an invalid date
   const date = dayjs(dateStr, ["YYYY-MM-DD", "DD/MM/YYYY", "DD MM YYYY"], true); // true = strict
 
   if (!date.isValid()) return null;
@@ -26,7 +27,7 @@ function isExpired(dateStr) {
 }
 
 export default forwardRef(function FileUploadComponent(
-  { industry, requiredDocuments },
+  { industry, business_name, requiredDocuments },
   ref,
 ) {
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ export default forwardRef(function FileUploadComponent(
   // ];
   const fileUploadRef = useRef(null);
   const industry_name = industry;
+
   /////////////
   // Helper parsing functions
   ////////////
@@ -358,7 +360,7 @@ export default forwardRef(function FileUploadComponent(
       <div className='flex flex-col items-center justify-center mb-6'>
         <h1 className='text-xl sm:text-3xl md:text-4xl font-bold mb-2 text-center'>
           <span className='text-3xl sm:text-5xl bg-gradient-to-r from-(--color-core-indigo) to-(--color-signal-red) bg-clip-text text-transparent'>
-            {industry_name}
+            {business_name}
           </span>
         </h1>
         <p className='text-base text-[var(--color-text-secondary)] text-center max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl leading-relaxed'>
