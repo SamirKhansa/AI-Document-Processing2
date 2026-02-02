@@ -42,6 +42,14 @@ const UseCases = () => {
     // navigate("/doc-iq");
   };
 
+  const handleInSightClick = () => {
+    console.log("Navigating to (In)Sight App...");
+    window.location.href =
+      "https://midisgroup1-my.sharepoint.com/:v:/r/personal/m_henley_ict_com_qa/Documents/Inception%20Web%20Summit/(In)Sight%20Product%20Overview%20Video.mp4?csf=1&web=1&e=JOymwt&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
+
+    // navigate("/doc-iq");
+  };
+
   const useCaseCards = [
     {
       title: "DocIQ",
@@ -55,23 +63,23 @@ const UseCases = () => {
       accentColor: "text-[var(--color-electric-blue)]",
       iconBg: "bg-[var(--color-electric-blue)]/10",
     },
-    // {
-    //   title: "Use Case 2",
-    //   description:
-    //     "Harness AI to analyze document patterns and provide actionable business intelligence.",
-    //   icon: <BrainCircuit className='w-8 h-8' />,
-    //   onClick: handleAIAnalysisClick,
-    //   hoverStyles:
-    //     "hover:bg-[var(--color-violet-blue)]/20 hover:border-[var(--color-violet-blue)]/50",
-    //   accentColor: "text-[var(--color-violet-blue)]",
-    //   iconBg: "bg-[var(--color-violet-blue)]/10",
-    // },
     {
       title: "Sales Avatar",
       description:
         "Automate customer conversations, qualify leads, and drive sales with an intelligent AI sales avatar.",
       icon: <Bot className='w-8 h-8' />,
       onClick: handleSalesAvatarClick,
+      hoverStyles:
+        "hover:bg-[var(--color-violet-blue)]/20 hover:border-[var(--color-violet-blue)]/50",
+      accentColor: "text-[var(--color-violet-blue)]",
+      iconBg: "bg-[var(--color-violet-blue)]/10",
+    },
+    {
+      title: "(In)Sight",
+      description:
+        "AI-Powered executive product that improves the quality and speed of organization decision making before during and after meetings",
+      icon: <BrainCircuit className='w-8 h-8' />,
+      onClick: handleInSightClick,
       hoverStyles:
         "hover:bg-[var(--color-magenta)]/20 hover:border-[var(--color-magenta)]/50",
       accentColor: "text-[var(--color-magenta)]",
@@ -102,7 +110,7 @@ const UseCases = () => {
           </p>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 '>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 '>
           {useCaseCards.map((card, index) => (
             <div
               key={index}
