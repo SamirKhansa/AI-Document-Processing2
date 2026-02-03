@@ -45,7 +45,7 @@ const UseCases = () => {
   const handleInSightClick = () => {
     console.log("Navigating to (In)Sight App...");
     window.location.href =
-      "https://midisgroup1-my.sharepoint.com/:v:/r/personal/m_henley_ict_com_qa/Documents/Inception%20Web%20Summit/(In)Sight%20Product%20Overview%20Video.mp4?csf=1&web=1&e=JOymwt&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D";
+      "https://websitewebsummit.blob.core.windows.net/demos/(In)Sight%20Product%20Overview%20Video.mp4";
 
     // navigate("/doc-iq");
   };
